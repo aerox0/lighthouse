@@ -67,7 +67,11 @@ const Label = styled('label')`
 	}
 `
 
-const Checkbox = ({ name, label, white, ...props }) => {
+const Checkbox = ({ handleCheckChange, name, label, white, ...props }) => {
+	const handleChange = e => {
+		handleCheckChange && handleCheckChange(e.target)
+	}
+
 	return (
 		<Container white={white}>
 			<input
@@ -75,6 +79,7 @@ const Checkbox = ({ name, label, white, ...props }) => {
 				name={name}
 				type="checkbox"
 				className="hide"
+				onChange={handleChange}
 				{...props}
 			/>
 			<Label htmlFor={name}>

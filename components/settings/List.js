@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import Item from './Item'
 
@@ -13,9 +13,7 @@ const List = ({ list }) => {
 	return (
 		<Container>
 			{list.map((el, i) => {
-				const count = typeof el.count == 'number' && String(el.count)
-
-				return <Item key={i} id={i} label={el.label} count={count} />
+				return <Item key={i} id={i} label={el.label} />
 			})}
 		</Container>
 	)

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import Button from '../Button'
 import CheckboxList from '../form/CheckboxList'
@@ -31,18 +31,40 @@ const Filter = () => {
 		else setShow(true)
 	}, [setting])
 
+	const handleClickDone = useCallback(() => {
+		let tmpSetting = { ...setting }
+		tmpSetting.activeId = null
+
+		const tmpSettingList = tmpSetting.settingList[setting.activeId]
+		tmpSettingList.count = tmpSettingList.settings.filter(
+			el => el.active == true
+		).length
+
+		setSetting(tmpSetting)
+		setShow(false)
+	}, [show])
+
+	const handleClickCancel = useCallback(() => {
+		setSetting({ ...setting, activeId: null })
+		setShow(false)
+	}, [show])
+
 	if (show == false) return <></>
 
 	return (
 		<Container>
 			<Content>
-				<CheckboxList list={setting.settingList} />
+				<CheckboxList list={setting.settingList} id={setting.activeId} />
 			</Content>
 
 			<Footer>
 				<div>
-					<Button style={{ marginRight: 8 }}>Cancel</Button>
-					<Button>Done</Button>
+					<Button style={{ marginRight: 8 }} onClick={handleClickCancel}>
+						Cancel
+					</Button>
+					<Button primary onClick={handleClickDone}>
+						Done
+					</Button>
 				</div>
 			</Footer>
 		</Container>

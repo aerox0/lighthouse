@@ -8,7 +8,7 @@ const index = () => {
 
 	const handleChangeListState = useCallback(() => {
 		setListView(s => !s)
-	}, [listView, setListView])
+	}, [listView])
 
 	return (
 		<Layout title="Search" hideFooter>

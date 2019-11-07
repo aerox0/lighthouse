@@ -17,8 +17,11 @@ const Container = styled('div')`
 	}
 `
 
-const Item = ({ label, count, id }) => {
+const Item = ({ label, id }) => {
 	const { setting, setSetting } = useContext(SettingContext)
+	const count =
+		typeof setting.settingList[id].count == 'number' &&
+		String(setting.settingList[id].count)
 
 	const handleToggle = useCallback(() => {
 		if (setting.activeId == id) setSetting({ ...setting, activeId: null })

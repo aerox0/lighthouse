@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Checkbox from './checkbox'
 
@@ -12,10 +12,7 @@ const Container = styled('div')`
 const Item = styled('div')`
 	flex-basis: 33.333%;
 	flex-grow: 1;
-
-	&:not(:last-child) {
-		margin-bottom: 8.25px;
-	}
+	margin-bottom: 8.25px;
 
 	&:nth-child(3n + 3) {
 		text-align: right;
@@ -30,16 +27,33 @@ const Item = styled('div')`
 	}
 `
 
-const CheckboxList = ({ list }) => {
+const CheckboxList = ({ list, id }) => {
+	const selectedItem = list[id]
+	const [checked, setChecked] = useState(
+		selectedItem && selectedItem.settings ? selectedItem.settings : []
+	)
+
+	const handleCheck = (e, i, name) => {
+		checked[i].active = e.checked
+		setChecked({ ...checked })
+	}
+
 	return (
 		<Container>
-			{list.map(({ label, name }, i) => {
-				return (
-					<Item key={i}>
-						<Checkbox name={name || i} label={label} />
-					</Item>
-				)
-			})}
+			{selectedItem &&
+				selectedItem.settings &&
+				selectedItem.settings.map(({ name, label, active }, i) => {
+					return (
+						<Item key={i}>
+							<Checkbox
+								name={name || i}
+								label={label}
+								checked={active}
+								handleCheckChange={e => handleCheck(e, i, name)}
+							/>
+						</Item>
+					)
+				})}
 		</Container>
 	)
 }
