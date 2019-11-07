@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Input = styled('input')`
+export const SearchInput = styled('input')`
 	background-color: #f6f6f6;
 	border-radius: 4px;
 	width: 100%;

@@ -1,5 +1,22 @@
 import styled, { css } from 'styled-components'
 
+export const BrownButton = styled('div')`
+	background-color: #fff;
+	border-radius: 4px;
+	border: 1px solid ${p => p.theme.colors.secondary};
+	padding: 9px 12px;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	transition: all 0.2s linear;
+	color: ${p => p.theme.colors.secondary};
+
+	&:hover {
+		background-color: ${p => p.theme.colors.secondary};
+		color: #fff;
+	}
+`
+
 export const TagButton = styled('div')`
 	background-color: ${p => (p.circle ? '' : p.theme.colors.gray)};
 	border-radius: ${p => (p.bdrs ? p.bdrs : '50px')};
@@ -35,6 +52,7 @@ export const TagButton = styled('div')`
 `
 
 const Button = styled('button')`
+	cursor: pointer;
 	padding-top: 5.5px;
 	padding-bottom: 7.5px;
 	padding-right: 27.5px;
@@ -54,6 +72,18 @@ const Button = styled('button')`
 		background-color: ${p => p.theme.colors.primary};
 		border: 1px solid ${p => p.theme.colors.primary};
 	}
+
+	${p =>
+		p.primary &&
+		css`
+		background-color: ${p => p.theme.colors.primary};
+		color: #fff;
+
+		&:hover [
+			background-color: #fff;
+			color: ${p => p.theme.colors.primary};
+		]
+	`}
 `
 
 export default Button

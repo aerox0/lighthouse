@@ -47,7 +47,9 @@ export default createGlobalStyle`
 	}
 
 	a {
-		color: ${theme.colors.primary}
+		color: ${theme.colors.primary};
+		text-decoration: none;
+		font-size: 1em;
 	}
 
 	.white {
@@ -76,6 +78,98 @@ export default createGlobalStyle`
 
 	.borderTop {
 		border-top: 1px solid ${theme.colors.gray}
+	}
+
+	.slick-dots {
+		position: absolute;
+		bottom: 15px;
+
+		li {
+			width: 10px;
+			height: 13px;
+
+			&.slick-active {
+				button {
+					&:before {
+						color: ${p => p.theme.colors.primary};
+						width: 10px;
+						height: 13px;
+					}
+				}
+			}
+
+			button {
+				width: 10px;
+				height: 13px;
+				&:before {
+					transition: all 0.2s linear;
+					color: #fff;
+					opacity: 1;
+					width: 10px;
+					height: 13px;
+				}
+			}
+		}
+	}
+
+	.slick-arrow {
+		height: auto;
+		img {
+			height: 30px;
+		}
+
+		&.slick {
+			&-next {
+				&:before {
+					display: none;
+				}
+			}
+			&-prev {
+				&:before {
+					display: none;
+				}
+			}
+		}
+	}
+
+	table {
+		width: 100%;
+		border-spacing: 0;
+
+		tbody {
+			border: 1px solid ${p => p.theme.colors.gray};
+			overflow: auto;
+			display: block;
+		}
+
+		tr {
+			th {
+				text-transform: capitalize;
+				text-align: left;
+				padding: 15px 20px;
+				font-weight: bold;
+				line-height: 1.3;
+				border-bottom: 1px solid ${p => p.theme.colors.gray};
+				font-size: 1.2em;
+				
+				&:last-child {
+					border-right: 0;
+				}
+			}
+
+			td {
+				border-bottom: 1px solid ${p => p.theme.colors.gray};
+				padding: 15px 10px 15px 20px;
+				line-height: 1.3;
+				font-size: 1.4em;
+				font-weight: normal;
+				vertical-align: top;
+
+				&:last-child {
+					border-right: 0;
+				}
+			}
+		}
 	}
 
 	.display-flex {

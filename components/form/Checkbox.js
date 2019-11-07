@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Container = styled('div')`
 	position: relative;
@@ -10,6 +10,21 @@ const Container = styled('div')`
 	input:checked + label:after {
 		opacity: 1;
 	}
+
+	${p =>
+		p.white &&
+		css`
+			input:checked + label:before {
+				border: 1px solid ${p => p.theme.colors.primary};
+				background-color: ${p => p.theme.colors.primary};
+			}
+
+			${Label} {
+				&:after {
+					background-image: url('/images/check-white.svg');
+				}
+			}
+		`}
 `
 
 const Label = styled('label')`
@@ -52,9 +67,9 @@ const Label = styled('label')`
 	}
 `
 
-const Checkbox = ({ name, label, ...props }) => {
+const Checkbox = ({ name, label, white, ...props }) => {
 	return (
-		<Container>
+		<Container white={white}>
 			<input
 				id={name}
 				name={name}

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { Input } from '../form/Input'
+import { SearchInput } from '../form/SearchInput'
 import SearchList from './SearchList'
 
 const Container = styled('div')`
@@ -119,7 +119,7 @@ const Search = () => {
 
 			<div className={`search-form ${isSearch ? 'active' : ''}`}>
 				<div className="search-input">
-					<Input
+					<SearchInput
 						style={{ paddingRight: 50 }}
 						type="text"
 						name="search"
