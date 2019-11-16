@@ -50,7 +50,7 @@ const Item = styled('div')`
 	}
 `
 
-const CheckboxList = ({ list, id, block }) => {
+const CheckboxList = ({ list, id, block, handleChange }) => {
 	const selectedItem = !!id ? list[id] : { settings: list }
 	const [checked, setChecked] = useState(
 		selectedItem && selectedItem.settings ? selectedItem.settings : []
@@ -59,6 +59,7 @@ const CheckboxList = ({ list, id, block }) => {
 	const handleCheck = (e, i, name) => {
 		checked[i].active = e.checked
 		setChecked({ ...checked })
+		handleChange && handleChange()
 	}
 
 	return (

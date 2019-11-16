@@ -56,6 +56,10 @@ const Container = styled('div')`
 `
 
 const SelectField = ({ options, label, name, icon }) => {
+	const handleChange = e => {
+		console.log('asd')
+	}
+
 	return (
 		<Container>
 			<div className="label">
@@ -71,6 +75,7 @@ const SelectField = ({ options, label, name, icon }) => {
 								id={`${name}-${i}`}
 								name={name}
 								value={op.value || op.label}
+								onChange={handleChange}
 							/>
 							<label htmlFor={`${name}-${i}`}>{op.label}</label>
 						</div>

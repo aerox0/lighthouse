@@ -57,7 +57,7 @@ const Container = styled('div')`
 	}
 `
 
-const Dropdown = ({ children }) => {
+const Dropdown = ({ children, label }) => {
 	const [open, setOpen] = useState(true)
 
 	const handleToggle = useCallback(() => {
@@ -67,7 +67,7 @@ const Dropdown = ({ children }) => {
 	return (
 		<Container className={`dropdown ${open && 'active'}`}>
 			<div className="dropdown__toggle" onClick={handleToggle}>
-				<span>All</span>
+				<span>{label}</span>
 				{open ? (
 					<>
 						<img src="/images/sort-up.svg" alt="Sort up" />
