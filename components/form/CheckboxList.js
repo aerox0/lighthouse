@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Checkbox from './checkbox'
 
 const Container = styled('div')`
@@ -7,6 +7,29 @@ const Container = styled('div')`
 	align-items: center;
 	justify-content: space-between;
 	flex-wrap: wrap;
+
+	${p =>
+		p.block &&
+		css`
+			display: block;
+			width: 100%;
+
+			label {
+				border-bottom: 1px solid ${({ theme }) => theme.colors.darkGray};
+				display: block;
+				text-align: left;
+				padding-left: 32px;
+				padding-top: 6px;
+				padding-bottom: 9px;
+
+				&:not(:last-child) {
+					margin-bottom: 10px;
+				}
+				&:before {
+					border: 0;
+				}
+			}
+		`}
 `
 
 const Item = styled('div')`
@@ -27,8 +50,8 @@ const Item = styled('div')`
 	}
 `
 
-const CheckboxList = ({ list, id }) => {
-	const selectedItem = list[id]
+const CheckboxList = ({ list, id, block }) => {
+	const selectedItem = !!id ? list[id] : { settings: list }
 	const [checked, setChecked] = useState(
 		selectedItem && selectedItem.settings ? selectedItem.settings : []
 	)
@@ -39,7 +62,7 @@ const CheckboxList = ({ list, id }) => {
 	}
 
 	return (
-		<Container>
+		<Container block={block}>
 			{selectedItem &&
 				selectedItem.settings &&
 				selectedItem.settings.map(({ name, label, active }, i) => {

@@ -214,4 +214,63 @@ export default createGlobalStyle`
 		flex-wrap: nowrap;
 		display: flex;
 	}
+
+	.slider {
+    position: relative;
+    height: 26px;
+    width: 100%;
+    border-radius: 6px;
+    touch-action: none;
+    box-sizing: border-box;
+	}
+
+	.slider .bar {
+		position: absolute;
+		background: #3151B7;
+		height: 4px;
+		border-radius: 6px;
+		top: 7px; 
+	}
+
+	.slider .bar.bar-0, .slider .bar.bar-2 {
+		background: #90A1D3; 
+	}
+
+	.slider .handle {
+		touch-action: pan-x;
+		margin-top: -4px; 
+	}
+
+	.slider .handle:after {
+		content: ' ';
+		position: absolute;
+		bottom: 15px;
+		height: 200px;
+		width: 500px; 
+	}
+
+	.slider .handle.handle-0:after {
+		background: none;
+		height: 0;
+	}
+	
+	.slider .handle.handle-1:after {
+		background: none;
+		height: 0;
+	}
+
+	.slider .handle .slider-handle {
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    cursor: grab;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+    border-radius: 50%;
+    background: #fff;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(31, 37, 59, 0.2);
+    text-align: center;
+	}
 `
