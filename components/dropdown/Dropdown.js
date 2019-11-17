@@ -1,13 +1,16 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 
 const Container = styled('div')`
-	background-color: ${({ theme }) => theme.colors.gray1};
-	max-width: 195px;
-	width: 100%;
+	min-width: 185px;
+	width: auto;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
 	position: relative;
+
+	&:not(:last-child) {
+		margin-right: 16px;
+	}
 
 	&.active {
 		.line {
@@ -17,6 +20,7 @@ const Container = styled('div')`
 
 	.dropdown {
 		&__toggle {
+			background-color: ${({ theme }) => theme.colors.gray1};
 			cursor: pointer;
 			padding: 16px 16px 20px 16px;
 			display: flex;
@@ -40,7 +44,7 @@ const Container = styled('div')`
 			border-bottom-right-radius: 4px;
 			padding: 23px 16px;
 			position: absolute;
-			top: 100%;
+			bottom: 0;
 			left: 0;
 			background-color: ${({ theme }) => theme.colors.gray1};
 			min-width: 240px;
@@ -58,14 +62,25 @@ const Container = styled('div')`
 `
 
 const Dropdown = ({ children, label }) => {
-	const [open, setOpen] = useState(true)
+	const [open, setOpen] = useState(false)
+	const [bodyHeight, setBodyHeight] = useState(0)
+	const bodyRef = useRef(null)
 
 	const handleToggle = useCallback(() => {
 		setOpen(s => !s)
 	}, [open])
 
+	useEffect(() => {
+		setBodyHeight(bodyRef.current ? bodyRef.current.clientHeight + 3 : 0)
+	}, [open])
+
 	return (
-		<Container className={`dropdown ${open && 'active'}`}>
+		<Container
+			className={`dropdown ${open && 'active'}`}
+			style={{
+				paddingBottom: bodyHeight
+			}}
+		>
 			<div className="dropdown__toggle" onClick={handleToggle}>
 				<span>{label}</span>
 				{open ? (
@@ -77,7 +92,7 @@ const Dropdown = ({ children, label }) => {
 				)}
 			</div>
 			{open ? (
-				<div className="dropdown__body">
+				<div className="dropdown__body" ref={bodyRef}>
 					{typeof children == 'function'
 						? children({ setOpen, open })
 						: children}
